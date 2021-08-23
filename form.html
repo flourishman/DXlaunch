@@ -1,0 +1,496 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" integrity="sha384-TX8t27EcRE3e/ihU7zmQxVncDAy5uIKz4rEkgIXeMed4M0jlfIDPvg6uqKI2xXr2" crossorigin="anonymous">
+    <script src="https://kit.fontawesome.com/f4ee20a794.js" crossorigin="anonymous"></script>
+    <!--Style CSS-->
+    <link rel="stylesheet" href="style.css">
+    <title>DXlaunchpad</title>
+  </head>
+  <body>
+    <nav class="navbar navbar-expand-lg navbar-light bg-primary">
+        <div class="container">
+            <a class="navbar-brand text-light" href="index.html">
+                <img src="img/DXlaunchpad-removebg-preview.png" alt="DXlaunchpad" class="img-fluid" width="100"></a>
+
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" 
+                data-bs-target="#togglerMobileMenu" aria-controls="togglerMobileMenu" 
+                aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="togglerMobileMenu">
+                <ul class="navbar-nav ml-auto text-center">
+                    <li class="nav-item">
+                        <a class="nav-link active text-light" aria-current="page" href="index.html">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link text-light" href="#">Create</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link text-light" href="#">Presale</a>
+                    </li>
+                
+                </ul>
+        
+            </div>
+        </div>
+    </nav>
+
+    <main role="main pt-5 mb-5 mt-5">
+
+      <div class="container marketing">
+
+        <div class="row">
+          <div class="col-lg-6 col-12">
+            <div class="form-row">
+              <div class="form-group col-md-6 col-12 mt-3">
+                <select id="createPageNetworkSelectionId" class="form-control">
+                  <option value="ETH" selected>ETH</option>
+                  <option value="BNB">BNB</option>
+                </select>
+              </div>
+              <button class="btn btn-outline-teal form-group col-md-6 col-12 d-block mt-2 bg-primary" id="connectBtnId" style="background-color: darkgreen;">
+                <i class="fa fa-plug mr-2"></i>Connect
+              </button>
+              <button class="btn btn-outline-teal form-group col-md-6 col-12 d-none" id="approveBtnId">
+                <i class="far fa-check-square mr-2"></i>Approve
+              </button>
+              <button class="btn btn-outline-teal form-group col-md-6 col-12 d-none" id="createBtnId">
+                <i class="far fa-plus-square mr-2"></i>Create
+              </button>
+            </div>
+
+          </div>
+        </div>
+
+        <div class="card">
+          <!-- <div class="card-header">Presale Details (Fields marked with * are required | Dev fee: 1% of raised ETH or 1 ETH, whichever is higher | Presale factory address: 0xcD76d39B8979A4025C09dfAD9161C83cD21234b2)</div> -->
+          <div class="card-body">
+
+
+            <div class="row">
+              <div class="col-md-6 col-12">
+                <div class="form-group">
+                  <label for="tokenInpAddressId" class="text-dark font-weight-bold"><span id="tokenTypeId">
+                  </span> Token Address<span class="text-danger font-weight-bold ml-1">*</span></label>
+                  <input type="text" class="form-control" id="tokenInpAddressId" aria-describedby="tokenInpAddressDesc"
+                    placeholder="0xf12cCb34b61621660d443B3198DEc0fa81EcC0aC">
+                  <small id="tokenInpAddressDesc" class="form-text text-muted">IMPORTANT: Token should
+                    NOT have liquidity in <span class="exchangeText"></span> until it is listed by DXlaunchpad</small>
+                </div>
+              </div>
+              <div class="col-md-6 col-12">
+                <div class="form-group">
+                  <label for="saleTitleInpId" class="text-dark font-weight-bold">Sale Title</label>
+                  <input type="text" class="form-control" id="saleTitleInpId" placeholder="Sale Title">
+                </div>
+              </div>
+            </div>
+
+            <div class="row">
+              <div class="col-md-6 col-12">
+                <div class="form-group">
+                  <label for="tokenPriceInpId" class="text-dark font-weight-bold">Token Price (<span class="eth-bnb">
+                  </span>)<span class="text-danger font-weight-bold ml-1">*</span></label>
+                  <input type="text" class="form-control onchangeValue" id="tokenPriceInpId" placeholder="0">
+                </div>
+              </div>
+              <div class="col-md-6 col-12">
+                <div class="form-group">
+                  <label for="unsoldTokenAddInpId" class="text-dark font-weight-bold">Address where UNSOLD TOKENS will be transferred to
+                    <span class="text-danger font-weight-bold ml-1">*</span>
+                  </label>
+                  <input type="text" class="form-control" id="unsoldTokenAddInpId" placeholder="0xf12cCb34b61621660d443B3198DEc0fa81EcC0aC">
+                </div>
+              </div>
+            </div>
+
+            <div class="row">
+              <div class="col-md-6 col-12">
+                <div class="form-group">
+                  <label for="hardCapInpId" class="text-dark font-weight-bold">Hard Cap (<span class="eth-bnb"></span>)<span class="text-danger font-weight-bold ml-1">*</span></label>
+                  <input type="text" class="form-control onchangeValue" id="hardCapInpId" placeholder="0">
+                  <small class="form-text text-muted">Maximum of <span id="tokensToSold">0</span> Tokens will be sold</small>
+                </div>
+              </div>
+              <div class="col-md-6 col-12">
+                <div class="form-group">
+                  <label for="softCapInpId" class="text-dark font-weight-bold">Soft Cap (<span class="eth-bnb"></span>)</label>
+                  <input type="text" class="form-control" id="softCapInpId" placeholder="0">
+                </div>
+              </div>
+            </div>
+
+            <div class="row">
+              <div class="col-md-6 col-12">
+                <div class="form-group">
+                  <label for="maxInvestPerWalletInpId" class="text-dark font-weight-bold">Max. Investment per Wallet (<span class="eth-bnb"></span>)</label>
+                  <input type="text" class="form-control" id="maxInvestPerWalletInpId" placeholder="0">
+                </div>
+              </div>
+              <div class="col-md-6 col-12">
+                <div class="form-group">
+                  <label for="minInvestPerWalletInpId" class="text-dark font-weight-bold">Min. Investment per Wallet (<span class="eth-bnb"></span>)</label>
+                  <input type="text" class="form-control" id="minInvestPerWalletInpId" placeholder="0">
+                </div>
+              </div>
+            </div>
+
+            <div class="row">
+              <div class="col-md-6 col-12 pt-4">
+                <!-- <div class="form-group">
+                  <input type="text" class="form-control" id="openAtDateInp" placeholder="0">
+                </div> -->
+                <label for="openAtDateInp" class="text-dark font-weight-bold">Open At<span class="text-danger font-weight-bold ml-1">*</span></label>
+                <div class="input-group date" id="startDateId" data-target-input="nearest">
+                  <input type="text" class="form-control datetimepicker-input" id="openAtDateInp" data-target="#startDateId"/>
+                  <div class="input-group-append" data-target="#startDateId" data-toggle="datetimepicker">
+                      <div class="input-group-text"><i class="fa fa-calendar"></i></div>
+                  </div>
+                </div>
+              </div>
+              <div class="col-md-6 col-12 pt-4">
+                <!-- <div class="form-group">
+                  <label for="closeAtDateInp" class="text-dark font-weight-bold">Close At<span class="text-danger font-weight-bold ml-1">*</span></label>
+                  <input type="text" class="form-control" id="closeAtDateInp" placeholder="0">
+                </div> -->
+                <label for="closeAtDateInp" class="text-dark font-weight-bold">Close At<span class="text-danger font-weight-bold ml-1">*</span></label>
+                <div class="input-group date" id="endDateId" data-target-input="nearest">
+                  <input type="text" class="form-control datetimepicker-input" id="closeAtDateInp" data-target="#endDateId"/>
+                  <div class="input-group-append" data-target="#endDateId" data-toggle="datetimepicker">
+                      <div class="input-group-text"><i class="fa fa-calendar"></i></div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+          </div>
+
+          <div class="card-header mt-5">Whitelist</div>
+          <div class="card-body">
+
+            <div class="row">
+              <div class="col-12">
+                <div class="form-group">
+                  <label for="whiteListInpId" class="text-dark font-weight-bold">Open At</label>
+                  <textarea  class="form-control" id="whiteListInpId" rows="4"
+                  placeholder="Example only: 0x89205A3A3b2A69De6Dbf7f01ED13B2108B2c43e7,0x71c7656ec7ab88b098defb751b7401b5f6d8976f,0xe989eb1ddd3e0cff345a91748dd4dce4a85f725a"></textarea>
+                <small class="form-text text-muted">Skip if there is no whitelist</small>
+                </div>
+              </div>
+
+            </div>
+
+
+          </div>
+
+          <div class="card-header mt-5"><span class="exchangeText"></span> Liquidity Lock and Allocation</div>
+          <div class="card-body">
+
+            <div class="row">
+              <div class="col-md-6 col-12">
+                <div class="form-group">
+                  <label for="uniswapListingRateInpId" class="text-dark font-weight-bold"><span class="exchangeText"></span> Listing Rate (n <span class="eth-bnb"></span> per 1 Token)<span class="text-danger font-weight-bold ml-1">*</span></label>
+                  <input type="text" class="form-control onchangeValue" id="uniswapListingRateInpId" aria-describedby="uniswapListingRateDesc"
+                    placeholder="2">
+                  <small id="uniswapListingRateDesc" class="form-text text-muted">e.g. Enter 2 if the <span class="exchangeText"></span> listing rate is 2 <span class="eth-bnb"></span> per 1 Token</small>
+                </div>
+              </div>
+              <div class="col-md-6 col-12">
+                <div class="form-group">
+                  <label for="percentageAllocateId" class="text-dark font-weight-bold">Percentage Allocated to <span class="exchangeText"></span> LP <span class="ml-4" id='rangePercentageId'></span></label>
+                  <input type="range" class="form-range form-control px-0 onchangeValue" min="0" max="100" step="1" id="percentageAllocateId"
+                  oninput="amount.value=percentageAllocateId.value+'%'">
+                  <output name="amount" id="amount" for="percentageAllocateId" class="font-weight-bold">50%</output>
+                  <small class="form-text text-muted">Maximum of <span id="maxLiq"></span> <span class="eth-bnb"></span> and <span id="maxTokensLiq"></span> Tokens will be added as liquidity</small>
+                </div>
+              </div>
+            </div>
+
+            <div class="row mt-2">
+              <div class="col-md-6 col-12 pt-0 mt-0">
+                <label for="uniswapListingTimeInpId" class="text-dark font-weight-bold"><span class="exchangeText"></span> Listing Time<span class="text-danger font-weight-bold ml-1">*</span></label>
+                <div class="input-group date" id="uniswapListingTime" data-target-input="nearest">
+                  <input type="text" class="form-control datetimepicker-input" id="uniswapListingTimeInpId" data-target="#uniswapListingTime"/>
+                  <div class="input-group-append" data-target="#uniswapListingTime" data-toggle="datetimepicker">
+                      <div class="input-group-text"><i class="fa fa-calendar"></i></div>
+                  </div>
+                </div>
+              </div>
+              <div class="col-md-6 col-12">
+                <div class="form-group">
+                  <label for="uniswapLpTokensLockDurInpId" class="text-dark font-weight-bold"><span class="exchangeText"></span> LP Tokens Lock Duration (Days)<span class="text-danger font-weight-bold ml-1">*</span></label>
+                  <input type="number" class="form-control" id="uniswapLpTokensLockDurInpId" placeholder="0">
+                  <small class="form-text text-muted">LP Tokens are automatically locked in a created contract</small>
+                </div>
+              </div>
+            </div>
+
+          </div>
+
+          <div class="card-header mt-5">Community Links</div>
+          <div class="card-body">
+
+            <div class="row">
+              <div class="col-md-6 col-12">
+                <div class="form-group">
+                  <label for="websiteInpId" class="text-dark font-weight-bold">Website</label>
+                  <input type="text" class="form-control" id="websiteInpId" aria-describedby="websiteInpDesc"
+                    placeholder="www.google.com">
+                </div>
+              </div>
+              <div class="col-md-6 col-12">
+                <div class="form-group">
+                  <label for="telegramInpId" class="text-dark font-weight-bold">Telegram</label>
+                  <input type="text" class="form-control" id="telegramInpId" placeholder="Telegram Link">
+                </div>
+              </div>
+            </div>
+
+            <div class="row">
+              <div class="col-md-6 col-12">
+                <div class="form-group">
+                  <label for="discrdInpId" class="text-dark font-weight-bold">Discord</label>
+                  <input type="text" class="form-control" id="discordInpId" placeholder="Discord Link">
+                </div>
+              </div>
+              <div class="col-md-6 col-12">
+                <div class="form-group">
+                  <label for="twitterInpId" class="text-dark font-weight-bold">Twitter</label>
+                  <input type="text" class="form-control" id="twitterInpId" placeholder="Twitter">
+                </div>
+              </div>
+            </div>
+
+            <div class="row">
+              <div class="col-md-6 col-12">
+                <div class="form-group">
+                  <label for="discrdInpId" class="text-dark font-weight-bold">Audit</label>
+                  <input type="text" class="form-control" id="auditInpId" placeholder="Audit Link">
+                </div>
+              </div>
+              <div class="col-md-6 col-12">
+                <div class="form-group">
+                  <label for="twitterInpId" class="text-dark font-weight-bold">Team</label>
+                  <input type="text" class="form-control" id="teamInpId" placeholder="Team Link">
+                </div>
+              </div>
+            </div>
+
+            <div class="row">
+              <div class="col-md-6 col-12">
+                <div class="form-group">
+                  <label for="influencerInpId" class="text-dark font-weight-bold">Influencer</label>
+                  <input type="text" class="form-control" id="influencerInpId" placeholder="Influencer">
+                </div>
+              </div>
+            </div>
+
+          </div>
+
+        </div>
+
+
+        <!-- /END THE FEATURETTES -->
+
+      </div><!-- /.container -->
+
+
+    </main>
+    <!-- Footer -->
+<footer class="text-center text-lg-start bg-light text-muted">
+    <!-- Section: Social media -->
+    <section
+      class="d-flex justify-content-center justify-content-lg-between p-4 border-bottom"
+    >
+      <!-- Left -->
+      <div class="me-5 d-none d-lg-block ml-5 pl-5">
+        <span>Get connected with us on social networks:</span>
+      </div>
+      <!-- Left -->
+  
+      <!-- Right -->
+      <div class="mr-5 pr-5">
+        <a href="https://t.me/DxLaunchpad" class="icotelegram" title="telegram">
+          <span class="fa-stack fa-lg">
+            <i class="fa fa-circle fa-stack-2x"></i>
+            <i class="fa fa-telegram fa-stack-1x fa-inverse"></i>
+          </span>
+        </a>
+        <a href="https://twitter.com/DXlaunchpad" class="icoTwitter " title="Twitter">
+          <span class="fa-stack fa-lg">
+            <i class="fa fa-circle fa-stack-2x"></i>
+            <i class="fa fa-twitter fa-stack-1x fa-inverse"></i>
+          </span>
+          
+        </a>
+        <a href="https://medium.com/@dxlaunchpad" class="icomedium" title="medium">
+          <span class="fa-stack fa-lg">
+            <i class="fa fa-circle fa-stack-2x"></i>
+            <i class="fa fa-medium fa-stack-1x fa-inverse"></i>
+          </span>
+        </a>
+      </div>
+      <!-- Right -->
+    </section>
+    <!-- Section: Social media -->
+  
+    <!-- Section: Links  -->
+    <!-- <section class=""> -->
+      <!-- <div class="container text-center text-md-start mt-5"> -->
+        <!-- Grid row -->
+        <!-- <div class="row mt-3"> -->
+          <!-- Grid column -->
+          <!-- <div class="col-md-3 col-lg-4 col-xl-3 mx-auto mb-4"> -->
+            <!-- Content -->
+            <!-- <h6 class="text-uppercase fw-bold mb-4">
+              <img src="img/DXlaunchpad-removebg-preview.png" alt="DXlaunchpad" class="img-fluid" width="100">DXlaunchpad
+            </h6>
+            <p class="p-3" style="text-align: justify;">
+              The key feature of Dxlaunchpad is the possibility of multichain fundraising, 
+              participants can experience seamless, cheaper and faster transactions during IDO. 
+              It is important that decentralized financing is not frustrated by one chain,
+               having choice is a must.
+            </p>
+          </div> -->
+          <!-- Grid column -->
+  
+          <!-- Grid column -->
+          <!-- <div class="col-md-2 col-lg-2 col-xl-2 mx-auto mb-4"> -->
+            <!-- Links -->
+            <!-- <h6 class="text-uppercase fw-bold mb-4">
+              Products
+            </h6>
+            <p>
+              <a href="#!" class="text-reset">Angular</a>
+            </p>
+            <p>
+              <a href="#!" class="text-reset">React</a>
+            </p>
+            <p>
+              <a href="#!" class="text-reset">Vue</a>
+            </p>
+            <p>
+              <a href="#!" class="text-reset">Laravel</a>
+            </p>
+          </div> -->
+          <!-- Grid column -->
+  
+          <!-- Grid column -->
+          <!-- <div class="col-md-3 col-lg-2 col-xl-2 mx-auto mb-4"> -->
+            <!-- Links -->
+            <!-- <h6 class="text-uppercase fw-bold mb-4">
+              Useful links
+            </h6>
+            <p>
+              <a href="#!" class="text-reset">Pricing</a>
+            </p>
+            <p>
+              <a href="#!" class="text-reset">Settings</a>
+            </p>
+            <p>
+              <a href="#!" class="text-reset">Orders</a>
+            </p>
+            <p>
+              <a href="#!" class="text-reset">Help</a>
+            </p>
+          </div> -->
+          <!-- Grid column -->
+  
+          <!-- Grid column -->
+          <!-- <div class="col-md-4 col-lg-3 col-xl-3 mx-auto mb-md-0 mb-4"> -->
+            <!-- Links -->
+            <!-- <h6 class="text-uppercase fw-bold mb-4">
+              Contact
+            </h6>
+            <p><i class="fas fa-home me-3"></i> New York, NY 10012, US</p>
+            <p>
+              <i class="fas fa-envelope me-3"></i>
+              info@example.com
+            </p>
+            <p><i class="fas fa-phone me-3"></i> + 01 234 567 88</p>
+            <p><i class="fas fa-print me-3"></i> + 01 234 567 89</p>
+          </div> -->
+          <!-- Grid column -->
+        <!-- </div> -->
+        <!-- Grid row -->
+      <!-- </div> -->
+    <!-- </section> -->
+    <!-- Section: Links  -->
+  
+    <!-- Copyright -->
+    <div class="text-center p-4 bg-primary text-light style="background-color: rgba(0, 0, 0, 0.05);">
+      © 2021 Copyright:
+      <a class="text-reset fw-bold" href="#">DXlaunchpad</a>
+    </div>
+    <!-- Copyright -->
+  </footer>
+  <!-- Footer -->
+    
+
+    <!-- Optional JavaScript; choose one of the two! -->
+
+    <!-- Option 1: jQuery and Bootstrap Bundle (includes Popper) -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ho+j7jyWK8fNQe+A12Hb8AhRq26LrZ/JpcUGGOn+Y7RsweNrtN/tE3MoK7ZeZDyx" crossorigin="anonymous"></script>
+
+    <!-- Option 2: jQuery, Popper.js, and Bootstrap JS
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.min.js" integrity="sha384-w1Q4orYjBQndcko6MimVbzY0tgp4pWB4lZ7lr30WKz0vr/aWKhXdBNmNb5D92v7s" crossorigin="anonymous"></script>
+    -->
+
+
+    <script src="assets/js/web3.min.js"></script>
+    <script>
+      try {
+        // var web3 = new Web3(window.web3.currentProvider);
+        var web3 = new Web3(Web3.givenProvider);
+        console.log(web3, 'web3 ..')
+      } catch (error) {
+        console.log(error, 'this is error')
+        // alert("provider not found") 
+      }
+    </script>
+    <!-- Bootstrap core JavaScript
+    ================================================== -->
+    <!-- Placed at the end of the document so the pages load faster -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="/assets/js/popper.min.js"></script>
+    <script src="assets/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.0/moment.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/tempusdominus-bootstrap-4/5.1.2/js/tempusdominus-bootstrap-4.min.js" integrity="sha512-2JBCbWoMJPH+Uj7Wq5OLub8E5edWHlTM4ar/YJkZh3plwB2INhhOC3eDoqHm1Za/ZOSksrLlURLoyXVdfQXqwg==" crossorigin="anonymous"></script>
+    <!-- Just to make our placeholder images work. Don't actually copy the next line! -->
+    <script src="assets/js/holder.min.js"></script>
+    <script src="assets/js/toastr.min.js"></script>
+    <script src="app/difiFundsFactory_abi.js"></script>
+    <script src="app/difiFundsInfo_abi.js"></script>
+    <script src="app/erc20Token_abi.js"></script>
+    <script src="app/common.js?v=17"></script>
+    <script src="app/create.js?v=17"></script>
+    <!-- <script>
+      [
+          'app/common.js?v=5',
+          'app/create.js?v=5'
+      ].forEach(function(src) {
+          var script = document.createElement('script');
+          script.src = src;
+          script.async = false;
+          document.head.appendChild(script);
+      });
+  </script> -->
+  </body>
+  <script>
+    $(() => {
+      $('#startDateId').datetimepicker();
+      $('#endDateId').datetimepicker();
+      $('#uniswapListingTime').datetimepicker();
+    })
+  </script>
+  </body>
+</html>
