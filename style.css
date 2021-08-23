@@ -1,0 +1,36 @@
+.img-fluid {
+    max-width: 100%;
+    height: auto;
+}
+#banner {
+    background-image: transparent url('img/banner.png') no-repeat center center /cover;
+}
+body{
+
+ /* Small devices (landscape phones, 576px and up) */
+@media (min-width: 576px) { 
+    h1 {
+        
+    }
+ }
+
+ /* Medium devices (tablets, 768px and up) */
+@media (min-width: 768px) { 
+
+ }
+
+ /* Large devices (desktops, 992px and up) */
+@media (min-width: 992px) { 
+
+}
+
+ /* X-Large devices (large desktops, 1200px and up) */
+@media (min-width: 1200px) { 
+
+ }
+
+ /* XX-Large devices (larger desktops, 1400px and up) */
+@media (min-width: 1400px) { 
+
+ }
+}
